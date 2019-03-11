@@ -1,0 +1,31 @@
+<div align="left">
+    <b>FIXTURE DEL EQUIPO</b>
+</div>
+<div>
+    <table class="table">
+        <tr >
+            <td><b>Fecha</b></td><td><b>Hora</b></td><td><b>Cancha</b></td><td class="center"><b>Local</b></td><td><b>Res. 1</b></td><td><b>Res. 2</b></td><td class="center"><b>Visitante</b></td>
+        </tr>
+
+        <tr class="odd" *ngFor="let partido of partidosService.partidos; let ind=index">
+          <td width="10%">{{ partido.PartidosFec}}</td><td width="10%">{{ partido.PartidosHor}}</td><td width="30%">{{ partido.PartidosCan}}</td><td class="center" width="17%">{{ partido.equiponom1}}</td><td class = "center" width="5%">{{ partido.Equipo1Res}}</td><td class = "center" width="5%">{{ partido.Equipo2Res}}</td><td class="center" width="17%">{{ partido.equiponom2}}</td>
+          <td class="center" width="6%">
+            <div class="tooltip">
+            <a href="#"  [routerLink]="['../../viewjugadores', EqId, partido.PartidosId]" >
+                <img width="20" tooltip="Top tooltip" src="assets/JUGADORES.png"/>
+            </a>
+            <span class="tooltiptext">Jugadores</span>
+            </div>
+          </td>
+        </tr>
+
+        <!--*ngIf="(ind + 1) % 2 != 0; else nuevafila"
+          <ng-template #nuevafila>    
+        <tr class="even">
+          <td>{{ partido.PartidosFec}}</td><td>{{ partido.PartidosHor}}</td><td>{{ partido.PartidosCan}}</td><td>{{ partido.equiponom1}}</td><td>{{ partido.Equipo1Res}}</td><td>{{ partido.Equipo2Res}}</td><td>{{ partido.equiponom2}}</td>
+        </tr>
+        </ng-template> 
+      </div>   -->
+
+    </table>
+  </div>

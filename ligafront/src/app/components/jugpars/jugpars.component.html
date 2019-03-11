@@ -1,0 +1,117 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+      <b>INGRESO JUGADOR A PARTIDO</b>
+  </div>
+  <form #jugparForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+      <tr  colspan="2">
+      <td width = "10%">Campeonato:</td>
+          <td>
+          <input type="text" readonly id="campeonatonom" name="campeonatonom" [(ngModel)]='campeonatosService.selectedCampeonato.campeonatonom' placeholder="Campeonato"/>
+          </td>
+      </tr>    
+      <tr  colspan="2">
+      <td width = "10%">Fecha del partido:</td>
+          <td>
+          <input type="text" readonly id="PartidosFec" name="PartidosFec" [(ngModel)]='partidosService.selectedPartido.PartidosFec' placeholder="Fecha"/>
+          </td>
+      </tr>    
+      <tr  colspan="2">
+        <td width = "10%">Equipo:</td>
+        <td>
+        <input type="text" readonly id="equiponom" name="equiponom" [(ngModel)]='jugparsService.selectedJugpar.equiponom' placeholder="Equipo"/>
+        </td>
+      </tr>    
+      <tr  colspan="2">
+        <td width = "30%"><font color="red">*</font>Jugador:</td>
+        <td>
+            <div class="typeHead">
+            <input type="text" list="jugadores" id="jugadornom" name="jugadornom" [(ngModel)]='jugparsService.selectedJugpar.jugadornom' placeholder="Jugador"/>
+            <datalist id="jugadores">
+                <select>
+                <option *ngFor="let jugador of jugadoresService.jugador" id={{jugador.jugadorid}} value={{jugador.jugadornom}}></option>
+                </select>
+            </datalist>
+            </div>
+        </td>
+        </tr>
+      <tr  colspan="2" >
+      <td width = "30%">Minutos jugados:</td>
+      <td>
+          <input type="text" name="jugadormin" #name="ngModel" [(ngModel)]="jugparsService.selectedJugpar.jugadormin" placeholder="Minutos">
+      </td>
+      </tr>
+      <tr  colspan="2" >
+      <td width = "30%">Tarjetas amarillas:</td>
+      <td>
+          <input type="text" name="jugadorama" #name="ngModel" [(ngModel)]="jugparsService.selectedJugpar.jugadorama" placeholder="Amarillas">
+      </td>
+      </tr>
+      <tr  colspan="2" >
+      <td width = "30%">Tarjeta roja:</td>
+      <td>
+          <input type="text" name="jugadorroj" #name="ngModel" [(ngModel)]="jugparsService.selectedJugpar.jugadorroj" placeholder="Roja">
+      </td>
+      </tr>
+      <tr  colspan="2" >
+      <td width = "30%">Goles:</td>
+      <td>
+          <input type="text" name="jugadorgol" #name="ngModel" [(ngModel)]="jugparsService.selectedJugpar.jugadorgol" placeholder="Goles">
+      </td>
+      </tr>
+      <tr  colspan="2" >
+      <td width = "30%">Observaciones:</td>
+      <td>
+          <input type="text" name="jugadorobs" #name="ngModel" [(ngModel)]="jugparsService.selectedJugpar.jugadorobs" placeholder="Observaciónes">
+      </td>
+      </tr>
+      <tr  colspan="2">
+      <td colspan="2">
+          <button style="margin-right: 3px;" class="btn left" (click)="resetForm(jugparForm)">Borrar</button>
+          <button class="btn left" (click)="addJugpar(jugparForm)">Guardar</button>
+      </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+        </td>
+      </tr>
+  </table>
+  </form>
+  <table style="width:100%" id="TJPa"> 
+  <tr>
+      <th colspan="5">Listado de jugadores</th>
+  </tr>
+
+  <tr>
+    <th colspan="1">Filtro por Equipo</th>
+    <th colspan="3"><input type="text" id="BJPa" (keyup)="Buscar()" placeholder="Equipo"></th>
+  </tr>
+
+  <tr>
+      <th><i>Equipo</i></th>
+      <th><i>jugador</i></th>
+      <th><i>Fecha partido</i></th>
+  </tr>
+  <tr *ngFor="let jugpar of jugparsService.jugpar">
+      <td >{{ jugpar.equiponom }}</td>
+      <td >{{ jugpar.jugadornom }}</td>
+      <td >{{ jugpar.PartidosFec}}</td>
+      <td>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editJugpar(jugpar)">
+          <img width="20" alt="Editar" src="assets/editar.png"/> 
+      </a>
+      <span class="tooltiptext">Editar datos jugador en partido</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteJugpar(jugpar.jugparid, jugparForm)">
+          <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar jugador de partido</span>
+      </div>
+      </td>
+  </tr>
+  </table>
+  </div>  
+  

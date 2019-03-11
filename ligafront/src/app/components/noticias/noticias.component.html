@@ -1,0 +1,94 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO NOTICIA</b>
+  </div>
+  <form #noticiaForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "10%">Equipo:</td>
+      <td>
+        <div class="typeHead">
+          <input list="equipos" id="equiponom" name="equiponom" #name="ngModel"  [(ngModel)]="equiposService.selectedEquipo.equiponom" placeholder="Equipos" /> 
+          <datalist id="equipos" >
+              <select id ="esel" >
+                <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+              </select>
+          </datalist>
+        </div>
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%">Fecha:</td>
+      <td>
+        <input type="hidden" name="noticiasid" #_id="ngModel" [(ngModel)]="noticiasService.selectedNoticia.noticiasid"> 
+        <input type="hidden" name="UsuariosAli" #_id="ngModel" [(ngModel)]="noticiasService.selectedNoticia.UsuariosAli"> 
+        <input type="date" name="noticiasfec" #name="ngModel" [(ngModel)]="noticiasService.selectedNoticia.noticiasfec" placeholder="Fecha">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%">Titulo:</td>
+      <td>
+        <input type="text" name="noticiascab" #name="ngModel" [(ngModel)]="noticiasService.selectedNoticia.noticiascab" placeholder="Titulo">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%">Cabezal:</td>
+      <td>
+        <input type="text" name="noticiasdet" #name="ngModel" [(ngModel)]="noticiasService.selectedNoticia.noticiasdet" placeholder="Cabezal">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%">Detalle:</td>
+      <td>
+        <textarea type="text" name="noticiastex" #name="ngModel" [(ngModel)]="noticiasService.selectedNoticia.noticiastex" placeholder="Detalle">
+        </textarea>
+      </td>
+    </tr>
+    <tr  colspan="2" > 
+      <td width = "10%">Foto:</td>
+      <td>
+        <input type="file" id="noticiasfot" name="noticiasfot" placeholder="Foto" (change)="onFileChanged($event)">
+      </td>
+    </tr>
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(noticiaForm)">Borrar</button>
+        <button class="btn left" (click)="addNoticia(noticiaForm)">Guardar</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%" id="TNot"> 
+  <tr>
+    <th colspan="4">Listado Noticias</th>
+  </tr>
+
+  <tr>
+    <th colspan="1">Filtro por Cabezal</th>
+    <th colspan="4"><input type="text" id="BNot" (keyup)="Buscar()" placeholder="Nombre"></th>
+  </tr>
+
+  <tr>
+    <td ><i>Titulo</i></td>
+    <td colspan="4"><i>Fecha</i></td>
+  </tr>
+  <tr *ngFor="let noticia of noticiasService.noticias">
+    <td colspan="2">{{ noticia.noticiascab }}</td>
+    <td colspan="2">{{ noticia.noticiasfec }}</td>
+    <td>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editNoticia(noticia)">
+        <img width="20" alt="Editar" src="assets/editar.png"/>
+      </a>
+      <span class="tooltiptext">Editar noticia</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteNoticia(noticia.noticiasid, noticiaForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar noticia</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div> 

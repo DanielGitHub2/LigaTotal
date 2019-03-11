@@ -1,0 +1,105 @@
+<!--Titulo-->
+<div style="text-align:center"><b>Partido del {{ParFec | date:'dd/MM/yyyy'}} </b></div>
+<br>
+<!--Resultado-->
+<table align="center" style="width: 80%; ">
+<tr>
+  <td width="15%" style="text-align:right"><img style="vertical-align:middle" width="150" height="150" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + Esc1)"></td>
+  <td width="25%" style="text-align:center; font-size:26px"><b>{{EqNom1}}</b></td>
+  <td width="7%" style="text-align:left; font-size:26px">{{Res1}}</td>
+  <td width="6%" style="text-align:center;font-size:26px"><b>-</b></td>
+  <td width="7%" style="text-align:right; font-size:26px">{{Res2}}</td>
+  <td width="25%" style="text-align:center; font-size:26px"><b>{{EqNom2}}</b></td>
+  <td width="15%" style="text-align:left"><img style="vertical-align:middle" width="150" height="150" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + Esc2)"></td>
+</tr>
+</table>
+<br>
+
+<!--Datos del partido-->
+<table align="center" style="width: 80%; border: 1px solid black;">
+
+  <tr>
+
+    <td style="vertical-align: top;width: 70%; ">
+     <table>
+
+      <tr >
+        <td bgcolor="#BDC3D6" style="width: 13%;height: 1px;">Goles</td><td></td>
+      </tr>
+      <tr *ngFor="let Gol of ResGol">
+        <td></td><td>{{Gol.jugadornom}}&nbsp;({{Gol.jugadorgol}})</td>
+      </tr>
+
+      <tr >
+        <td bgcolor="#E9F571">Amarillas</td><td></td>
+      </tr>
+      <tr *ngFor="let Ama of ResAma">
+          <td></td><td>{{Ama.jugadornom}}&nbsp;({{Ama.jugadorama}})</td>
+      </tr>
+
+      <tr >
+        <td bgcolor="#FB4D3F">Rojas</td><td></td>
+      </tr>
+      <tr *ngFor="let Roj of ResRoj">
+          <td></td><td>{{Roj.jugadornom}}&nbsp;({{Roj.jugadorroj}})</td>
+      </tr>
+
+     </table>  
+    </td>
+
+    <td style="vertical-align: top;width: 30%;">
+     <table> 
+
+      <tr>
+        <td bgcolor="#BDC3D6" style="width: 30%;">Goles</td><td></td>
+      </tr>
+      <tr *ngFor="let Gol of ResGol2">
+        <td></td><td>{{Gol.jugadornom}}&nbsp;({{Gol.jugadorgol}})</td>
+      </tr>
+
+      <tr >
+        <td bgcolor="#E9F571">Amarillas</td><td></td>
+      </tr>
+      <tr *ngFor="let Ama of ResAma2">
+          <td></td><td>{{Ama.jugadornom}}&nbsp;({{Ama.jugadorama}})</td>
+      </tr>
+
+      <tr >
+        <td bgcolor="#FB4D3F">Rojas</td><td></td>
+      </tr>
+      <tr *ngFor="let Roj of ResRoj2">
+          <td></td><td>{{Roj.jugadornom}}&nbsp;({{Roj.jugadorroj}})</td>
+      </tr>
+
+     </table>  
+    </td>
+
+  </tr>
+  
+  <tr *ngIf="Obs != 'null'">
+    <td colspan="4"> Observaciones</td>
+  </tr>
+  <tr *ngIf="Obs != 'null'">
+    <td colspan="4">{{Obs}}</td>
+  </tr>
+
+</table>
+
+<br>
+
+<!--Lugar-->
+<table align="center" style="border: 1px solid black; width: 80%; ">
+<tr>
+  <th>Complejo</th>
+  <th>Cancha</th>
+  <th>Fecha</th>
+  <th>Hora</th>
+</tr>
+
+<tr>
+  <td>{{Com}}</td>
+  <td>{{Can}}</td>
+  <td>{{Fec}}</td>
+  <td>{{Hor}}</td>
+</tr>
+</table>

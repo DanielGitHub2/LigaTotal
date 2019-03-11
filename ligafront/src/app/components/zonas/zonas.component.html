@@ -1,0 +1,47 @@
+<div style="width: 60%;margin-left: 10px;">
+<form #zonaForm="ngForm"> 
+  <div align="left">
+    <b>INGRESO ZONAS</b>
+  </div>
+  <table style="width:100%" style="border: 2px solid black;">
+      <tr  colspan="2" >
+        <td width = "10%"><font color="red">*</font>Nombre:</td>
+        <td>
+          <input type="hidden" name="zonaid" #_id="ngModel" [(ngModel)]="zonasService.selectedZona.zonaid"> 
+          <input type="text" name="zonanom" #name="ngModel" [(ngModel)]="zonasService.selectedZona.zonanom" placeholder="Zona">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button style="margin-right: 3px;" class="btn left" (click)="resetForm(zonaForm)">Borrar</button>
+          <button class="btn left" (click)="addZona(zonaForm)">Guardar</button>
+        </td>
+      </tr>
+      <tr>
+          <td colspan="2">
+          <font  size="1" color="red">* Campos obligatorios</font>
+        </td>
+      </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="3">Listado Zonas</th>
+  </tr>
+  <tr>
+    <td colspan="3"><i>Nombre</i></td>
+  </tr>
+  <tr *ngFor="let zona of zonasService.zonas">
+    <td colspan="2">{{ zona.zonanom }}</td>
+    <td>
+      <a style="cursor:pointer;" (click)="editZona(zona)">
+        <img width="20" alt="Editar" src="assets/editar.png"/>
+        <!--<i class="material-icons">edit</i>-->
+      </a>
+      <a style="cursor:pointer;" (click)="deleteZona(zona.zonaid, zonaForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+    </td>
+  </tr>
+</table>  
+</div>

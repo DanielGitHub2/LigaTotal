@@ -1,0 +1,38 @@
+<!--Galeria de IMAGENES-->
+<table>
+<div style="display: inline;" class="container" *ngFor="let ima of equiposService.equipo; let ind=index" >
+    <td >
+        <div >
+            <a href="#" [routerLink]="['../equipodatos', ima.equipoid]">
+                <img  width="300px" height="200px" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + ima.equipofot)">
+            </a>
+            
+            <!--(mouseenter) ="mouseEnter('div a')" (mouseleave) ="mouseLeave('div A')"
+                <a href="#" [routerLink]="['../equipodatos', ima.equipoid]">
+                <img  style="position:relative;top:40px;left:-200px;z-index: 1;height:100px;width:100px;"
+                    [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + ima.equipoesc)">
+            </a>-->
+        </div>
+        <a href="#" [routerLink]="['../equipodatos', ima.equipoid]">
+            <p class="blocktext"><b>{{ima.equiponom}}</b></p>
+        </a>
+
+        <div class="caja">{{ima.zonanom}}&nbsp;-&nbsp;{{ima.divisionalnom}}
+        </div>
+    </td>
+   
+
+    <!--EN CASO QUE SE QUIERA OTRO COMPORTAMIENTO DE ALGUNAS FILAS 
+        *ngIf="(ind + 1) % 4 != 0; else nuevafila" 
+        <ng-template #nuevafila>   
+        <td>
+            <a href="#" [routerLink]="['../usuarios']">
+            <img width="300" height="150" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + ima.equipofot)">
+            </a>
+            <br><a href="#" [routerLink]="['../usuarios']"><p class="blocktext">{{ima.equiponom}}</p></a>
+        </td>
+        <br>
+    </ng-template>--> 
+</div> 
+</table>
+

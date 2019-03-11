@@ -1,0 +1,103 @@
+<div style="width: 60%;margin-left: 10px;">
+    <div align="left">
+        <b>INGRESO DE PAGO</b>
+    </div>
+    <form #pagoequipoForm="ngForm"> 
+    <table style="width:100%" style="border: 2px solid black;">
+        <tr  colspan="2">
+          <td width = "30%">Equipo:</td>
+          <td>
+              <div class="typeHead">
+              <input type="text" list="equipos" id="equiponom" name="equiponom" [(ngModel)]='pagoequiposService.selectedPagoequipo.equiponom' placeholder="Equipos"/>
+              <datalist id="equipos">
+                  <select>
+                  <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+                  </select>
+              </datalist>
+              </div>
+          </td>
+        </tr>
+        <tr  colspan="2" >
+        <td width = "30%">Fecha:</td>
+        <td>
+            <input type="hidden" name="UsuariosId" #_id="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.UsuariosId"> 
+            <input type="hidden" name="pagoequipoid" #_id="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequipoid"> 
+            <input type="date" name="pagoequipofec" #name="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequipofec" placeholder="Fecha pago">
+        </td>
+        </tr>
+        <tr  colspan="2" >
+        <td width = "30%">Medio de pago:</td>
+        <td>
+            <input type="text" name="pagoequipomedio" #name="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequipomedio" placeholder="Medio de pago">
+        </td>
+        </tr>
+        <tr  colspan="2" >
+        <td width = "30%">Monto ($U):</td>
+        <td>
+            <input type="text" name="pagoequipototal" #name="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequipototal" placeholder="Total pago">
+        </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "30%">Referencia:</td>
+          <td>
+              <input type="text" name="pagoequiporef" #name="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequiporef" placeholder="Referencia">
+          </td>
+        </tr>
+        <tr  colspan="2" >
+        <td width = "30%">Observaciones:</td>
+        <td>
+            <input type="text" name="pagoequipoobs" #name="ngModel" [(ngModel)]="pagoequiposService.selectedPagoequipo.pagoequipoobs" placeholder="Observaciones">
+        </td>
+        </tr>
+        <!--<tr  colspan="2" >
+        <td width = "30%">Factura:</td>
+        <td>
+            <input type="file" id="pagoequipofactura" name="pagoequipofactura" placeholder="Foto" (change)="onFileChanged($event)">
+        </td>
+        </tr>-->
+        <tr  colspan="2">
+        <td colspan="2">
+            <button style="margin-right: 3px;" class="btn left" (click)="resetForm(pagoequipoForm)">Borrar</button>
+            <button class="btn left" (click)="addPagoequipo(pagoequipoForm)">Guardar</button>
+        </td>
+        </tr>
+    </table>
+    </form>
+
+    <table style="width:100%" id="TPag" > 
+    <tr>
+        <th colspan="5">Listado de pagos</th>
+    </tr>
+
+    <tr>
+        <th colspan="1">Filtro por Equipo</th>
+        <th colspan="3"><input type="text" id="BPag" (keyup)="Buscar()" placeholder="Equipo"></th>
+    </tr>
+
+    <tr>
+        <th width = "25%"><i>Equipo </i></th>
+        <th width = "25%"><i>Fecha de pago </i></th>
+        <th width = "25%" colspan="5"><i>Total $U</i></th>
+    </tr>
+    <tr *ngFor="let pagoequipo of pagoequiposService.pagoequipos">
+        <td >{{ pagoequipo.equiponom}}</td>
+        <td >{{ pagoequipo.pagoequipofec }}</td>
+        <td >{{ pagoequipo.pagoequipototal }}</td>
+        
+        <td width = "15%">
+        <div class="tooltip">
+        <a style="cursor:pointer;" (click)="editPagoequipo(pagoequipo)">
+            <img width="20" alt="Editar" src="assets/editar.png"/> 
+        </a>
+        <span class="tooltiptext">Editar pago de equipo</span>
+        </div>
+        <div class="tooltip">
+        <a style="cursor:pointer;" (click)="deletePagoequipo(pagoequipo.pagoequipoid, pagoequipoForm)">
+            <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+        </a>
+        <span class="tooltiptext">Borrar pago de equipo</span>
+        </div>
+        </td>
+    </tr>
+    </table>
+    </div>  

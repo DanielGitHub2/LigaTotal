@@ -1,0 +1,151 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO JUGADOR</b>
+  </div>
+  <form #jugadorForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+
+    <tr  colspan="2" *ngIf="userrol != 2">
+      <td width = "30%"><font color="red">*</font>Equipo:</td>
+      <td>
+        <div class="typeHead">
+         <input type="hidden" name="equipoidid" id="equipoid">
+         <input list="equipos" id="equiponom" name="equiponom" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.equiponom" placeholder="Equipos" /> 
+          <datalist id="equipos" >
+              <select id ="esel" >
+                <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+              </select>
+          </datalist>
+        </div>
+      </td>
+    </tr>
+    <tr  colspan="2" *ngIf="userrol == 2">
+        <td width = "30%">Equipo:</td>
+        <td>
+          <input type="hidden" name="equipoidid" id="equipoid">  
+          <input readonly id="equiponom" name="equiponom" #name="ngModel"  [(ngModel)]="jugadoresService.selectedJugador.equiponom" placeholder="Equipos" /> 
+        </td>
+      </tr>
+    <tr >
+    <tr  colspan="2" >
+      <td width = "30%"><font color="red">*</font>Nombre:</td>
+      <td>
+        <input type="hidden" name="jugadorid" #_id="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadorid"> 
+        <input type="text" name="jugadornom" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadornom" placeholder="Jugador">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%"><font color="red">*</font>CI:</td>
+      <td>
+        <input type="text" name="jugadorci" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadorci" placeholder="CI">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">eMail:</td>
+      <td>
+        <input type="text" name="jugadoremail" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadoremail" placeholder="eMail">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+        <td width = "30%">Teléfono:</td>
+        <td>
+          <input type="text" name="jugadortel" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadortel" placeholder="Teléfono">
+        </td>
+      </tr>
+    <tr >
+    <tr  colspan="2" >
+        <td width = "30%">Dirección:</td>
+        <td>
+          <input type="text" name="jugadordir" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadordir" placeholder="Dirección">
+        </td>
+      </tr>
+    <tr >
+    <tr  colspan="2" >
+        <td width = "30%">Fecha de nacimiento:</td>
+        <td>
+          <input type="date" name="jugadorfecnac" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadorfecnac" placeholder="Fecha de nacimiento">
+        </td>
+      </tr>
+    <tr >
+    <tr  colspan="2" >
+        <td width = "30%">Fecha de inscripción:</td>
+        <td>
+          <input type="date" name="jugadorfecins" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadorfecins" placeholder="Fecha de inscripción">
+        </td>
+      </tr>
+    <tr >
+    <tr  colspan="2" >
+      <td width = "30%">Número asignado:</td>
+      <td>
+        <input type="text" name="jugadornro" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadornro" placeholder="Número asignado">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Posición:</td>
+      <td>
+        <input type="text" name="jugadorpos" #name="ngModel" [(ngModel)]="jugadoresService.selectedJugador.jugadorpos" placeholder="Posición">
+      </td>
+    </tr>
+    <tr  colspan="2" > 
+      <td width = "30%">Foto:</td>
+      <td>
+        <input type="file" id="jugadorfot" name="jugadorfot" placeholder="Foto" (change)="onFileChanged($event)">
+      </td>
+    </tr>
+    <tr >
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(jugadorForm)">Borrar</button>
+        <button class="btn left" (click)="addJugador(jugadorForm)">Guardar</button>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%" id="TJug"> 
+  <tr>
+    <th colspan="5">Listado Jugadores</th>
+  </tr>
+
+  <tr>
+    <th colspan="1">Filtro por Nombre</th>
+    <th colspan="4"><input type="text" id="BJug" (keyup)="Buscar()" placeholder="Nombre"></th>
+  </tr>
+
+  <tr>
+    <th ><i>Nombre</i></th>
+    <th ><i>Nro. Dorsal</i></th>
+    <th colspan="5"><i>Equipo</i></th>
+  </tr>
+  <tr *ngFor="let jugador of jugadoresService.jugador">
+    <td colspan="1">{{ jugador.jugadornom }}</td>
+    <td colspan="1">{{ jugador.jugadornro }}</td>
+    <td colspan="3">{{ jugador.equiponom }}</td>
+    <td>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editJugador(jugador)">
+        <img width="20" alt="Editar" src="assets/editar.png"/>
+      </a>
+      <span class="tooltiptext">Editar jugador</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteJugador(jugador.jugadorid, jugadorForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar jugador</span>
+      </div>
+      <div class="tooltip">
+        <a href="#"  [routerLink]="['../jugcarnet', jugador.jugadorid]">
+          <img width="20" alt="Carnet" src="assets/carnetJug.png"/>
+        </a>
+        <span class="tooltiptext">Carnet jugador</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div> 
+

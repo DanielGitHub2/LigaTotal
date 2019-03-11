@@ -1,0 +1,151 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO CAMPEONATO</b>
+  </div>
+  <form #campeonatoForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "30%"><font color="red">*</font>Zona:</td>
+      <td>
+        <div class="typeHead">
+          <input type="text" list="zonas" name="zonanom" [(ngModel)]='campeonatosService.selectedCampeonato.zonanom' placeholder="Zonas"/>
+          <datalist id="zonas">
+              <select>
+                <option *ngFor="let zona of zonasService.zonas" id={{zona.zonaid}} value={{zona.zonanom}}></option>
+              </select>
+          </datalist>
+        </div>
+      </td>
+    </tr>    
+    <tr  colspan="2">
+      <td width = "30%"><font color="red">*</font>Modalidad:</td>
+      <td>
+       <div class="typeHead">
+        <input type="text" list="modalidades" name="modalidadnom" [(ngModel)]='campeonatosService.selectedCampeonato.modalidadnom' placeholder="Modalidades"/>
+        <datalist id="modalidades">
+            <select>
+              <option *ngFor="let modalidad of modalidadesService.modalidad" id={{modalidad.modalidadid}} value={{modalidad.modalidadnom}}></option>
+            </select>
+        </datalist>
+       </div>
+      </td>
+    </tr>
+    <tr  colspan="2">
+      <td width = "30%"><font color="red">*</font>Divisional:</td>
+      <td>
+       <div class="typeHead">
+        <input type="text" list="divisionales" name="divisionalnom" [(ngModel)]='campeonatosService.selectedCampeonato.divisionalnom' placeholder="Divisionales"/>
+        <datalist id="divisionales">
+            <select>
+              <option *ngFor="let divisional of divisionalesService.divisional" id={{divisional.divisionalid}} value={{divisional.divisionalnom}}></option>
+            </select>
+        </datalist>
+       </div>
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%"><font color="red">*</font>Nombre:</td>
+      <td>
+        <input type="hidden" name="campeonatoid" #_id="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatoid"> 
+        <input type="text" name="campeonatonom" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatonom" placeholder="Campeonato">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Precio:</td>
+      <td>
+        <input type="text" name="campeonatoprecio" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatoprecio" placeholder="Precio">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Premio:</td>
+      <td>
+        <input type="text" name="campeonatopremio" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatopremio" placeholder="Premio">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Cantidad de equipos:</td>
+      <td>
+        <input type="text" readonly name="campeonatoequipos" #name="ngModel" [(ngModel)]="CanEq" placeholder="Equipos">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Estado:</td>
+      <td>
+          <input type="text" list="estados" name="campeonatoestado" value="Activo" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatoestado" placeholder="Estado">
+          <datalist id="estados">
+            <option value="Activo"> 
+            <option value="Terminado">
+            <option value="Suspendido">
+          </datalist> 
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Fecha de inicio:</td>
+      <td>
+        <input type="date" name="campeonatofecini" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatofecini" placeholder="Fecha de inicio">
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Fecha de fin:</td>
+      <td>
+        <input type="date" name="campeonatofecfin" #name="ngModel" [(ngModel)]="campeonatosService.selectedCampeonato.campeonatofecfin" placeholder="Fecha de fin">
+      </td>
+    </tr>
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(campeonatoForm)">Borrar</button>
+        <button class="btn left" (click)="addCampeonato(campeonatoForm)">Guardar</button>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="6">Listado Campeonatos</th>
+  </tr>
+  <tr>
+    <td><i>Nombre</i></td>
+    <td><i>Divisional</i></td>
+    <td><i>Fecha inicio</i></td>
+    <td colspan="6"><i>Estado</i></td>
+  </tr>
+  <tr *ngFor="let campeonato of campeonatosService.campeonatos">
+    <td >{{ campeonato.campeonatonom }}</td>
+    <td >{{ campeonato.divisionalnom }}</td>
+    <td >{{ campeonato.campeonatofecini }}</td>
+    <td >{{ campeonato.campeonatoestado }}</td>
+    <td>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editCampeonato(campeonato)">
+        <img width="20" alt="Editar" src="assets/editar.png"/> 
+      </a>
+      <span class="tooltiptext">Editar campeonato</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteCampeonato(campeonato.campeonatoid, campeonatoForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar campeonato</span>
+      </div>
+      <div class="tooltip" *ngIf = "campeonato.campeonatoestado === 'Activo'"> 
+      <a href="#"  [routerLink]="['../camequipos', campeonato.campeonatoid]">
+        <img width="25" tooltip="Top tooltip" src="assets/JUGADORES.png"/>
+      </a>
+      <span class="tooltiptext">Administrar equipos del campeonato</span>
+      </div>
+      <div class="tooltip" *ngIf = "campeonato.campeonatoestado === 'Activo'">
+      <a href="#"  [routerLink]="['../partidos', campeonato.campeonatoid]">
+        <img width="30" tooltip="Top tooltip" src="assets/partidos.png"/>
+      </a>
+      <span class="tooltiptext">Administrar partidos del campeonato</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>  
+

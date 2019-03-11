@@ -1,0 +1,140 @@
+/*#columna1 { background: white; width:20%; vertical-align: top;}
+#columna2 { background: white; width:60%; vertical-align: top;}
+#columna3 { background: white; width:20%; vertical-align: top;}
+#columna1, #columna2, #columna3 { display: inline-block; color: black; }*/
+
+
+/**********************************************************************************/
+/*CABECERA Y PIE DE PAGINA*/
+#main-header {
+	background: #333;
+	color: white;
+    height: auto;
+    width: 100%; 
+}	
+
+
+
+/**********************************************************************************/
+/*MENU HORIZONTAL TOP*/
+.third-level-menu
+{
+    position: absolute;
+    top: 0;
+    right: -165px;
+    list-style: none;
+    padding: 0px, 0px, -10px, 0px;
+    margin: 0;
+    display: none;
+}
+
+.third-level-menu > li
+{
+    background: #FFFFFF;/* #999999;*/
+    display: block;
+    line-height:5px;
+   
+}
+.third-level-menu > li:hover { background:#01DFA5; }
+
+.second-level-menu
+{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 120%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.second-level-menu > li
+{
+    position: relative;
+    height: 30px;
+    background: #FFFFFF;/* #999999;*/
+}
+.second-level-menu > li:hover { background:#01DFA5; }
+
+.top-level-menu
+{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+.top-level-menu > li
+{
+    position: relative;
+    float:left;
+    height: 30px;
+    width: 12.5%;
+    background: #FFFFFF;/* #999999;*/
+}
+.top-level-menu > li:hover { background: #01DFA5;}/* #CCCCCC; }*/
+
+.top-level-menu li:hover > ul
+{
+    /* On hover, display the next level's menu */
+    display: inline;
+}
+
+/* Menu Link Styles */
+.top-level-menu a /* Apply to all links inside the multi-level menu */
+{
+    font: 14px Arial, Helvetica, sans-serif;
+    color: #000000;/* #FFFFFF;*/
+    text-decoration: none;
+    padding: 0 0 0 10px;
+
+    /* Make the link cover the entire list item-container */
+    display: inline-block;
+    line-height: 30px;
+}
+.top-level-menu a:hover { color: #000000; }
+
+
+/**********************************************************************************/
+/*LINEA VERTICAL*/
+hr.v{
+width: 1px;
+height: 500px;
+}
+
+li {
+text-align: left;
+}
+
+
+/**********************************************************************************/
+/*MENU VERTICAL*/
+.vertical-menu {
+  width: 150px; 
+  height: 150px;
+  overflow-y: auto;
+ border-right: 1px solid #bbb;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black; 
+  display: block; 
+  padding: 10px;
+  text-decoration: none;
+  border-right: 1px solid #bbb;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; 
+}
+
+.vertical-menu a:active {
+  background-color: #060a09; 
+  color: white;
+}
+
+
+
+

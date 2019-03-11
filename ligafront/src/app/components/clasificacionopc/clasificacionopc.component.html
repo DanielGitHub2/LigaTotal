@@ -1,0 +1,76 @@
+<b>Clasificación</b>
+<br>
+<div class="tab">
+  <div *ngFor="let div of divisionalesService.divisional; let ind=index">
+  <button class="tablinks" (click)="campeonatosDivisionales($event, div.divisionalid)" id=div.divisionalid>{{div.divisionalnom}}</button>
+  </div>
+</div>
+
+<div id="DivCon" class="tabcontent">
+  <div class="tabh">
+    <div *ngFor="let cam of campeonatosService.campeonatos; let ind=index">
+      <button class="tablinksh" (click)="getCanEquipocam($event, cam.campeonatoid)" id=cam.campeonatoid>{{cam.campeonatonom}}</button>
+    </div>
+  </div>
+    
+  <div id="cargando"><b>Cargando...</b></div>
+
+  <div id="CamClasificacion" class="tabcontenth">
+
+    <table class="scrolltable">
+      <tr *ngIf="CanEq > 0">
+        <td style="width:5%"></td>
+        <td style="width:35%"><b>Equipo</b></td>
+        <td style="width:10%"><b>PJ</b></td>
+        <td style="width:10%"><b>PG</b></td>
+        <td style="width:10%"><b>PE</b></td>
+        <td style="width:10%"><b>PP</b></td>
+        <td style="width:10%"><b>GF</b></td>
+        <td style="width:10%"><b>GC</b></td>
+        <td style="width:10%"><b>PTOS</b></td>
+      </tr>
+
+      <tr class="odd" *ngFor="let equipo of eqclas ; let ind=index">                                   
+        <td width="5%" style="background-color:#CEF6D8" *ngIf="ind < 3">
+          <img style="vertical-align:middle" width="25" height="25" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + equipo.equipoesc)">
+        </td>
+        <td width="5%" style="background-color:white" *ngIf="ind >= 3">
+          <img style="vertical-align:middle" width="25" height="25" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + equipo.equipoesc)">
+        </td>
+
+
+        <td width="40%" style="background-color:#CEF6D8" *ngIf="ind < 3">
+          <a href="#" [routerLink]="['../equipodatos', equipo.equipoid]">
+          {{ equipo.equiponom}}
+          </a>
+        </td>
+        <td width="40%" style="background-color:white" *ngIf="ind >= 3">
+          <a  href="#" [routerLink]="['../equipodatos', equipo.equipoid]">
+          {{ equipo.equiponom}}
+          </a>
+        </td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.pj}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.pj}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.pg}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.pg}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.pe}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.pe}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.pp}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.pp}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.gf}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.gf}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.gc}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.gc}}</td>
+
+        <td width="10%" style="background-color:#CEF6D8" *ngIf="ind < 3">{{ equipo.ptos}}</td>
+        <td width="10%" style="background-color:white" *ngIf="ind >= 3">{{ equipo.ptos}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

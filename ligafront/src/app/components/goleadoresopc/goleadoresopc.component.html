@@ -1,0 +1,39 @@
+<b>Goleadores</b>
+<br>
+<div class="tab">
+  <div *ngFor="let div of divisionalesService.divisional; let ind=index">
+  <button class="tablinks" (click)="campeonatosDivisionales($event, div.divisionalid)" id=div.divisionalid>{{div.divisionalnom}}</button>
+  </div>
+</div>
+
+<div id="DivCon" class="tabcontent">
+  
+  <div class="tabh">
+    <div *ngFor="let cam of campeonatosService.campeonatos; let ind=index">
+      <button class="tablinksh" (click)="getGolesJug($event, cam.campeonatoid)" id=cam.campeonatoid>{{cam.campeonatonom}}</button>
+    </div>
+  </div>
+    
+  <div id="GolJug" class="tabcontenth">
+
+    <table class="scrolltable" >
+      <tr *ngIf="CanJug > 0">
+        <td style="height:40%"><b>Nombre</b></td>
+        <td style="height:40%"><b>Equipo</b></td>
+        <td style="height:20%"><b>Goles</b></td>
+      </tr>
+
+      <tr class="odd" *ngFor="let jug of juparsService.jugpar">
+        <td width="40%">{{ jug.jugadornom}}</td>
+        <td width="40%">{{ jug.equiponom}}</td>
+        <td width="20%">{{ jug.jugadorgol}}</td>
+      </tr>
+    </table>
+    
+  </div>
+
+</div>
+
+  
+
+

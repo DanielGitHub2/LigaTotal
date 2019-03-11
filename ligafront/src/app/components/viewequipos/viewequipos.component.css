@@ -1,0 +1,88 @@
+p.blocktext {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: center;
+    font-size: 14pt;
+    color: black;
+}
+
+.textcenter {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.tableh{
+    height: 30px;
+}
+
+
+/*----------- TOOL TIP----------- */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*----------- CAJA ----------- */
+.caja { 
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    color: white; 
+    font-size: 14px; 
+    /*font-weight: 100;*/ 
+    text-align: center; 
+    background: black; 
+    margin: 0 0 25px;
+    overflow: hidden; 
+    /*padding: 20px; */
+    border-radius: 25px 0px 25px 0px; 
+    -moz-border-radius: 25px 0px 25px 0px; 
+    -webkit-border-radius: 25px 0px 25px 0px; 
+    /*border: 1px solid #5878ca;*/
+}
+
+
+

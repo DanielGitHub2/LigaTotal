@@ -1,0 +1,60 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO DE FOTOS</b>
+  </div>
+  <form #partidosFotosForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "10%">Campeonato:</td>
+        <td>
+          <input type="text" readonly id="campeonatoid" name="campeonatoid" [(ngModel)]='camnom' placeholder="Campeonato"/>
+        </td>
+    </tr>  
+    <tr  colspan="2">
+      <td width = "10%">Fecha partido:</td>
+        <td>
+          <input type="text" readonly id="PartidosId" name="PartidosId" [(ngModel)]='parfec' placeholder="Fecha partido"/>
+        </td>
+    </tr>   
+    <tr  colspan="2" > 
+      <td width = "30%">Foto:</td>
+      <td>
+        <input type="file" id="CamFecFotosFot" name="CamFecFotosFot" placeholder="Foto" multiple (change)="onFileChanged($event)">
+      </td>
+    </tr> 
+
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(partidosFotosForm)">Borrar</button>
+        <button class="btn left" (click)="addCamFot(partidosFotosForm)">Guardar</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="5">Listado de fotos del campeonato/partido</th>
+  </tr>
+  <tr>
+    <td width = "25%"><i>Campeonato</i></td>
+    <td width = "25%"><i>Fecha partido</i></td>
+    <td width = "25%" colspan="5"><i>Foto</i></td>
+  </tr>
+  <tr *ngFor="let fotos of camFot">
+    <td >{{ fotos.campeonatonom}}</td>
+    <td >{{ fotos.PartidosFec }}</td>
+    <td >
+      <img width="100" height="70" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + fotos.CamFecFotosFot)">
+    </td>
+
+    <td width = "15%"> 
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteCamequipo(fotos.CamFecFotosId, partidosFotosForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar foto</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>  

@@ -1,0 +1,37 @@
+<div id="content" #content>
+
+<div align="left">
+  <font SIZE=5>
+  <b>CAMPEONATO - {{CamNom}}</b><br>
+  <b>PARTIDO DE FECHA: {{ParFec}}</b><br>
+  <b>LISTADO DE JUGADORES - EQUIPO:  {{EqNom}}</b>
+  </font>
+</div>
+<br>
+<div>
+  <font SIZE=3>
+  <table>
+    <tr>
+        <td ><b>Nombre</b></td>
+        <td ><b>CI</b></td>
+        <td ><b>Jugó</b></td>
+        <td ><b>Min</b></td>
+        <td ><b>Ama</b></td>
+        <td ><b>Roj</b></td>
+    </tr>
+    <tr *ngFor="let jugador of jugadoresService.jugador; let ind=index">
+      <td width="52%">{{ jugador.jugadornom }}</td>
+      <td width="12%">{{ jugador.jugadorci }}</td>
+      <td width="9%"> </td>
+      <td width="9%"> </td>
+      <td width="9%"> </td>
+      <td width="9%"> </td>
+    </tr>
+  </table>
+  </font>
+</div>
+</div>
+
+<br>
+<button class="btn left" (click)="imprimir(viewjugadoresForm)">Imprimir</button>
+

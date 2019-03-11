@@ -1,0 +1,150 @@
+<div style="width: 60%;margin-left: 10px;">
+<div align="left">
+    <b>INGRESO PARTIDOS</b>
+</div>
+<form #partidoForm="ngForm"> 
+<table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+    <td width = "10%">Campeonato:</td>
+        <td>
+        <input type="text" readonly id="campeonatonom" name="campeonatonom" [(ngModel)]='campeonatosService.selectedCampeonato.campeonatonom' placeholder="Campeonatos"/>
+        </td>
+    </tr>    
+    <tr  colspan="2">
+    <td width = "30%"><font color="red">*</font>Equipo 1:</td>
+    <td>
+        <div class="typeHead">
+        <input type="text" list="equipos1" id="equiponom1" name="equiponom1" [(ngModel)]='partidosService.selectedPartido.equiponom1' placeholder="Equipos"/>
+        <datalist id="equipos1">
+            <select>
+            <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+            </select>
+        </datalist>
+        </div>
+    </td>
+    </tr>
+    <tr  colspan="2">
+    <td width = "30%"><font color="red">*</font>Equipo 2:</td>
+    <td>
+        <div class="typeHead">
+        <input type="text" list="equipos2" id="equiponom2" name="equiponom2" [(ngModel)]='partidosService.selectedPartido.equiponom2' placeholder="Equipos"/>
+        <datalist id="equipos2">
+            <select>
+            <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+            </select>
+        </datalist>
+        </div>
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%"><font color="red">*</font>Nro. de fecha:</td>
+    <td>
+        <input type="text" name="PartidosFecJug" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosFecJug" placeholder="Nro. de fecha">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%"><font color="red">*</font>Fecha del partido:</td>
+    <td>
+        <input type="hidden" name="PartidosId" #_id="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosId"> 
+        <input type="date" name="PartidosFec" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosFec" placeholder="Fecha partido">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%"><font color="red">*</font>Hora:</td>
+    <td>
+        <input type="text" name="PartidosHor" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosHor" placeholder="Hora partido">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%"><font color="red">*</font>Complejo:</td>
+    <td>
+        <input type="text" name="PartidosComplejo" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosComplejo" placeholder="Complejo">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%"><font color="red">*</font>Cancha:</td>
+    <td>
+        <input type="text" name="PartidosCan" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosCan" placeholder="Cancha">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%">Resultado equipo 1:</td>
+    <td>
+        <input type="text" name="Equipo1Res" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.Equipo1Res" placeholder="Resultado 1">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%">Resultado equipo 2:</td>
+    <td>
+        <input type="text" name="Equipo2Res" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.Equipo2Res" placeholder="Resultado 2">
+    </td>
+    </tr>
+    <tr  colspan="2" >
+    <td width = "30%">Observaciónes:</td>
+    <td>
+        <input type="text" name="PartidosObs" #name="ngModel" [(ngModel)]="partidosService.selectedPartido.PartidosObs" placeholder="Observaciónes">
+    </td>
+    </tr>
+    <tr  colspan="2">
+    <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(partidoForm)">Borrar</button>
+        <button class="btn left" (click)="addPartido(partidoForm)">Guardar</button>
+    </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+        </td>
+    </tr>
+</table>
+</form>
+<table style="width:100%" id="TPar"> 
+<tr>
+    <th colspan="8">Listado de partidos</th>
+</tr>
+
+<tr>
+    <th colspan="2">Filtro por Numero de fecha</th>
+    <th colspan="5"><input type="number" id="BPar" (keyup)="Buscar()" placeholder="Nombre"></th>
+</tr>
+
+<tr>
+    <th style="width: 12%"><i>Nro fecha</i></th>
+    <th style="width: 30%"><i>Equipo 1</i></th>
+    <th style="width: 30%"><i>Equipo 2</i></th>
+    <th style="width: 13%"><i>Fecha</i></th>
+</tr>
+<tr *ngFor="let partido of partidosService.partidos">
+    <td style="width: 12%">{{ partido.PartidosFecJug }}</td>
+    <td style="width: 30%">{{ partido.equiponom1}}</td>
+    <td style="width: 30%">{{ partido.equiponom2 }}</td>
+    <td style="width: 13%">{{ partido.PartidosFec }}</td>
+    <td>
+    <div class="tooltip">
+    <a style="cursor:pointer;" (click)="editPartido(partido)">
+        <img width="20" alt="Editar" src="assets/editar.png"/> 
+    </a>
+    <span class="tooltiptext">Editar partido</span>
+    </div>
+    <div class="tooltip">
+    <a style="cursor:pointer;" (click)="deletePartido(partido.PartidosId, partidoForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+    </a>
+    <span class="tooltiptext">Borrar partido</span>
+    </div>
+    <div class="tooltip">
+    <a href="#"  [routerLink]="['../../jugpar', partido.PartidosId, partido.equipoid1]">
+        <img width="20" tooltip="Top tooltip" src="assets/jugador.png"/>
+    </a>
+    <span class="tooltiptext">Administrar jugadores de equipo 1</span>
+    </div>
+    <div class="tooltip">
+    <a href="#"  [routerLink]="['../../jugpar', partido.PartidosId, partido.equipoid2]">
+        <img width="20" tooltip="Top tooltip" src="assets/jugador.png"/>
+    </a>
+    <span class="tooltiptext">Administrar jugadores de equipo 2</span>
+    </div>
+    </td>
+</tr>
+</table>
+</div>  

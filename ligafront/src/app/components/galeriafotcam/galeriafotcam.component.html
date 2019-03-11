@@ -1,0 +1,7 @@
+<h5><i>Galeria de fotos - Campeonato {{CamNom}}</i></h5>
+<br>
+<div style="display: inline;" class="container" *ngFor="let ima of camFot; let ind=index" >
+    <td>
+      <img width="300" height="200" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + ima.CamFecFotosFot)">
+    </td>
+</div>

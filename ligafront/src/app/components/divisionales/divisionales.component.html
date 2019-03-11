@@ -1,0 +1,73 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO DIVISIONAL</b>
+  </div>
+  <form #divisionalForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "10%">Zona:</td>
+      <td>
+        <div class="typeHead">
+          <input type="text" list="zonas" id="zonanom" name="zonanom" #_id="ngModel" [(ngModel)]='divisionalesService.selectedDivisional.zonanom' placeholder="Zonas"/>
+          <datalist id="zonas">
+              <select>
+                <option *ngFor='let zona of zonasService.zonas' id={{zona.zonaid}} value={{zona.zonanom}}></option>
+              </select>
+          </datalist>
+        </div>
+      </td>
+    </tr>    
+    <tr  colspan="2">
+      <td width = "10%">Modalidad:</td>
+      <td>
+       <div class="typeHead">
+        <input type="text" list="modalidades" id="modalidadnom" name="modalidadnom" [(ngModel)]='divisionalesService.selectedDivisional.modalidadnom' placeholder="Modalidades"/>
+        <datalist id="modalidades">
+            <select>
+              <option *ngFor="let modalidad of modalidadesService.modalidad" id={{modalidad.modalidadid}} value={{modalidad.modalidadnom}}></option>
+            </select>
+        </datalist>
+       </div>
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%">Nombre:</td>
+      <td>
+        <input type="hidden" name="divisionalid" #_id="ngModel" [(ngModel)]="divisionalesService.selectedDivisional.divisionalid"> 
+        <input type="text" name="divisionalnom" #name="ngModel" [(ngModel)]="divisionalesService.selectedDivisional.divisionalnom" placeholder="Divisional">
+      </td>
+    </tr>
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(divisionalForm)">Borrar</button>
+        <button class="btn left" (click)="addDivisional(divisionalForm)">Guardar</button>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="3">Listado Divisionales</th>
+  </tr>
+  <tr>
+    <td colspan="3"><i>Nombre</i></td>
+  </tr>
+  <tr *ngFor="let divisional of divisionalesService.divisional">
+    <td colspan="2">{{ divisional.divisionalnom }}</td>
+    <td>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editDivisional(divisional)">
+        <img width="20" alt="Editar" src="assets/editar.png"/> 
+      </a>
+      <span class="tooltiptext">Editar divisional</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteDivisional(divisional.divisionalid, divisionalForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar divisional</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>  

@@ -1,0 +1,170 @@
+<form #appForm="ngForm" > 
+
+<!------------------------------------------------------------------------------>
+<!--CABECERA-->
+<div id='main-header'>
+    <img src="assets/Franja01.jpg" alt="Liga Total" style="max-width:100%;width:auto;height:auto;"/>
+</div>
+
+
+<!------------------------------------------------------------------------------>
+<!--MENU HORIZONTAL TOP - ADMINISTRADOR-->
+<div >
+<ul class="top-level-menu">
+    <li><a href="#" (click)='ShowNews(1)'>Home</a></li>
+    <li><a href="#" [routerLink]="['viewequipos']" (click)='ShowNews(0)'>Equipos</a></li>
+    <li><a href="#" [routerLink]="['fixtureopci']" (click)='ShowNews(0)'>Fixtures </a>
+    </li>
+    <li><a href="#" [routerLink]="['clasificacionopc']" (click)='ShowNews(0)'>Clasificacion</a>
+    </li>  
+    <li><a href="#" [routerLink]="['goleadoresopc']" (click)='ShowNews(0)'>Goleadores</a>
+    </li>
+
+    <div *ngIf = "!userLoginService.isUserLoggedIn">
+    <li></li>
+    <li></li>
+    </div>
+
+    <li style="float:right;" *ngIf = "!userLoginService.isUserLoggedIn">
+        <div class="col-md-6 col-md-offset-3">
+          <div *ngIf = "!userLoginService.isUserLoggedIn">
+            <a (click)='openModal("custom-modal-1")' style="cursor:pointer;">LogIn</a>
+          </div>
+        </div>
+    </li>
+
+    <!--Menu Administracion solo si esta logeado-->
+    <li *ngIf = "userLoginService.isUserLoggedIn"><a href="#" (click)='ShowNews(0)'>Administración</a>
+      <!--Menu Administrador-->
+      <ul class="second-level-menu" *ngIf = "userrol == 1">
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['usuarios']">Usuarios</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['zonas']">Zonas</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['modalidades']">Modalidades</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['divisionales']">Divisionales</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['equipos']">Equipos</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['jugadores']">Jugadores</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['campeonatos']">Campeonatos</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['viewpagoequipos']">Pagos de equipos</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['noticias']">Noticias</a></li>
+      </ul>
+      <!--Menu Encargado-->
+      <ul class="second-level-menu" *ngIf = "userrol == 2">
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['jugadores']">Jugadores</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['partidosequipo', equipo]">Partidos y jugadores</a></li>
+        <li><a href="#" (click)='ShowNews(0)' [routerLink]="['pagoequipos']">Ingreso de pago</a></li>
+      </ul>
+    </li>
+
+    <li *ngIf = "userLoginService.isUserLoggedIn"></li>
+
+    <li style="float:right;" *ngIf = "userLoginService.isUserLoggedIn">
+        <div class="col-md-6 col-md-offset-3">
+          <div *ngIf = "userLoginService.isUserLoggedIn">
+            <a (click)='LogOut(appForm)' style="cursor:pointer;">LogOut - </a>
+            {{userlog}}
+          </div>
+        </div>
+    </li>
+    <!--Fin Menu Administracion solo si esta logeado-->
+</ul>
+</div>
+
+<!------------------------------------------------------------------------------>
+<!--Imagen post menu-->
+<img src="assets/Franja02.jpg" style="background-color:#222222;max-width:100%;width:auto;height:auto;"/>
+
+
+<!------------------------------------------------------------------------------>
+<!--POPUP LOGIN-->
+<jw-modal id="custom-modal-1">
+    <ul style="margin-left: 10px;margin-right: 10px;">
+    <li style="color:red;font-size:30px;">LogIn</li>
+    <hr style="height: 1px;border-color: red;"/>
+    <li>Usuario: <input type="text" #name="ngModel" name="username" [(ngModel)]="username" placeholder="Usuario"/></li>
+    <li>Password: <input type="text" #name="ngModel" name="password" [(ngModel)]="password" placeholder="Password"/></li>
+    <li><button (click)="logIn(appForm)">LogIn</button>
+    &nbsp;&nbsp;&nbsp;
+    <button (click)="closeModal('custom-modal-1');">Cerrar</button></li>
+    </ul>
+</jw-modal>
+
+
+<!------------------------------------------------------------------------------>
+<!--Tabla contenedora-->
+<table style="width:100%">
+
+<tr>
+  <!------------------------------------------------------------------------------>
+  <!--Panel Vertical Izquierdo Noticias-->
+  <td width = "100%" style="vertical-align:top; text-align: left" *ngIf = "noticias!=0">
+    <img src="assets/CabNoticias.jpg" alt="Noticias" style="max-width:100%;width:auto;height:auto;align-content:left;"/>
+    <br>
+    <br>
+    <table>
+      <tr *ngFor="let noticia of noticiasService.noticias">
+        <td width="310">
+          <a href="#"  (click)='ShowNews(0)' [routerLink]="['../../viewnoticia', noticia.noticiasid]">  
+          <img width="300" height="200" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + noticia.noticiasfot)">
+          </a>
+        </td>
+        <td style="vertical-align:top;">
+          <a href="#"  (click)='ShowNews(0)' [routerLink]="['../../viewnoticia', noticia.noticiasid]">  
+          {{noticia.noticiascab}}
+          </a>
+          <br>
+          <hr/>
+          <br>
+          {{noticia.noticiasdet}}
+        </td>
+      </tr>
+    </table>
+  </td>
+
+
+  <!------------------------------------------------------------------------------>
+  <!--CENTRO-->
+  <td width = "70%" *ngIf = "noticias===0">
+    <router-outlet></router-outlet>
+  </td>  
+
+</tr>
+
+</table>
+
+<ul>
+  <li> </li>
+</ul>
+
+<!------------------------------------------------------------------------------>
+<!--PIE DE PAGINA-->
+<table>
+  <div id='main-header'>
+      <img src="assets/Footer01.jpg" alt="Liga Total" style="max-width:100%;width:auto;height:auto;" usemap="#contacto"/>
+
+      <!--Maps segun tamaño de imagen-->
+      <map name="contacto" id="1900">
+        <area alt="eMail" shape="rect" coords="10,40,44,60" href="mailto:info@ligatotal.com.uy?Subject=Consulta" target="_top">
+        <area alt="face" shape="rect" coords="50,40,65,60" href="https://www.facebook.com/LALIGATOTALURU" target="_blank">
+      </map>
+      <map name="contacto" id="1200">
+        <area alt="eMail" shape="rect" coords="10,40,44,60" href="mailto:info@ligatotal.com.uy?Subject=Consulta" target="_top">
+        <area alt="face" shape="rect" coords="50,40,65,60" href="https://www.facebook.com/LALIGATOTALURU" target="_blank">
+      </map>
+      <map name="contacto" id="360">
+        <area alt="eMail" shape="rect" coords="10,40,44,60" href="mailto:info@ligatotal.com.uy?Subject=Consulta" target="_top">
+        <area alt="face" shape="rect" coords="50,40,65,60" href="https://www.facebook.com/LALIGATOTALURU" target="_blank">
+      </map>
+
+  </div>
+</table>
+</form>
+
+
+<!--
+  <img src="assets/Img1.jpg" alt="AlqOpi" 
+sizes="(min-width: 640px) 40vw, 50vw" 
+srcset="assets/Img1.jpg 200w, assets/Img1.jpg 400w,  
+assets/Img1.jpg 800w, assets/Img1.jpg 1200w" /> -->
+
+
+

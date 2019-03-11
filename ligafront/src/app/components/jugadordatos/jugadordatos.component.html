@@ -1,0 +1,85 @@
+<table>
+  <tr>
+  <td class="valigntop">
+      <img style="vertical-align:middle" width="150" height="150" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + JuFot)">
+  </td>
+  <td class="valigntop">
+    <table width="40%">
+    <tr>
+      <td colspan = "2" class="alignleft">
+      <font size =6>
+        <b>Datos generales</b>
+      </font>
+      </td>
+    </tr>
+    <tr>
+      <td width="40%">Nombre:</td>
+      <td width="60%" align="left">{{JuNom}}</td>
+    </tr>
+    <tr>
+      <td>Estado:</td>
+      <td width="60%" align="left">{{JuEst}}</td>
+    </tr>
+    <tr>
+      <td>Edad:</td>
+      <td width="60%" align="left">{{JuEda}}</td>
+    </tr>
+    <tr>
+      <td>Fecha inscripción:</td>
+      <td width="60%" align="left">{{JuFin}}</td>
+    </tr>
+    <tr>
+      <td>Número:</td>
+      <td width="60%" align="left">{{JuNum}}</td>
+    </tr>
+    <tr>
+      <td>Posición:</td>
+      <td width="60%" align="left">{{JuPos}}</td>
+    </tr>
+    <tr>
+      <td class="tdvacio"></td>
+      <td class="tdvacio"></td>
+    </tr>
+    </table>
+  </td>
+  <td class="valigntop">
+    <table width="40%">
+      <tr>
+        <td colspan = "2">
+        <font size =6>
+          <b>Estadísticas</b>
+        </font>
+        </td>
+      </tr> 
+      <tr>
+        <td width="40%">Partidos jugados:</td>
+        <td width="60%" class="alignleft">{{JuPar}}</td>
+      </tr>
+      <tr>
+        <td>Minutos jugados:</td>
+        <td width="60%" align="left">{{JuMin}}</td>
+      </tr>
+      <tr>
+        <td>Goles totales:</td>
+        <td width="60%" align="left">{{JuGol}}</td>
+      </tr>
+      <tr>
+        <td>Goles x partido:</td>
+        <td width="60%" align="left">{{JuGolPar}}</td>
+      </tr>
+      <tr>
+        <td>Amarillas:</td>
+        <td width="60%" align="left">{{JuAma}}</td>
+      </tr>
+      <tr>
+        <td>Rojas:</td>
+        <td width="60%" align="left">{{JuRoj}}</td>
+      </tr>
+      <tr>
+        <td>Suspenciónes:</td>
+        <td width="60%" align="left">{{JuSus}}</td>
+      </tr>
+    </table>
+  </td>
+  </tr>
+</table>

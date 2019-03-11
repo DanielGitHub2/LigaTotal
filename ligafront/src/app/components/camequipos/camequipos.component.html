@@ -1,0 +1,95 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>ADMINISTRACIÓN EQUIPOS EN UN CAMPEONATO</b>
+  </div>
+  <form #camequipoForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "10%">Campeonato:</td>
+        <td>
+          <input type="text" readonly id="campeonatonom" name="campeonatonom" [(ngModel)]='campeonatosService.selectedCampeonato.campeonatonom' placeholder="Campeonatos"/>
+        </td>
+    </tr>    
+    <tr  colspan="2">
+      <td width = "30%"><font color="red">*</font>Equipo:</td>
+      <td>
+       <div class="typeHead">
+        <input type="text" list="equipos" name="equiponom" [(ngModel)]='camequiposService.selectedCamEquipo.equiponom' placeholder="Equipos"/>
+        <datalist id="equipos">
+            <select>
+              <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+            </select>
+        </datalist>
+       </div>
+      </td>
+    </tr>
+    <tr  colspan="2" *ngIf="EqEdi===1">
+      <td width = "30%">Equipo suspendido:</td>
+      <div class="typeHead">
+      <input list="sus" id="equiposus" name="equiposus" #name="ngModel" [(ngModel)]="EqSus" placeholder="Suspendido" /> 
+        <datalist id="sus" >
+            <select id ="esel" >
+              <option id=0 value=NO></option>
+              <option id=1 value=SI></option>
+            </select>
+        </datalist>
+      </div>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "30%">Observaciones:</td>
+      <td>
+        <input type="hidden" name="camequid" #_id="ngModel" [(ngModel)]="camequiposService.selectedCamEquipo.camequid"> 
+        <input type="text" name="camequobs" #name="ngModel" [(ngModel)]="camequiposService.selectedCamEquipo.camequobs" placeholder="Observaciones">
+      </td>
+    </tr>
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(camequipoForm)">Borrar</button>
+        <button class="btn left" (click)="addCamequipo(camequipoForm)">Guardar</button>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="5">Listado equipos del campeonato</th>
+  </tr>
+  <tr>
+    <td width = "25%"><i>Nombre</i></td>
+    <td width = "25%"><i>Fecha inscripción</i></td>
+    <td width = "25%" colspan="5"><i>Suspendido</i></td>
+  </tr>
+  <tr *ngFor="let camequipo of camequiposService.camequipos">
+    <td >{{ camequipo.equiponom}}</td>
+    <td >{{ camequipo.equipofecins }}</td>
+    <div *ngIf = "camequipo.equsus > 0; else sus"> 
+      <td >SI</td>
+    </div>
+    <ng-template #sus>
+      <td >NO</td>
+    </ng-template>
+
+    <td width = "15%"> 
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="editCamequipo(camequipo)">
+        <img width="20" alt="Editar" src="assets/editar.png"/> 
+      </a>
+      <span class="tooltiptext">Editar/Suspender equipo de campeonato</span>
+      </div>
+      <div class="tooltip">
+      <a style="cursor:pointer;" (click)="deleteCamequipo(camequipo.camequid, camequipoForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+      <span class="tooltiptext">Borrar equipo de campeonato</span>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>  
+
+

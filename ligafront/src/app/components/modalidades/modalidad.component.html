@@ -1,0 +1,59 @@
+<div style="width: 60%;margin-left: 10px;">
+  <div align="left">
+    <b>INGRESO MODALIDAD</b>
+  </div>
+  <form #modalidadForm="ngForm"> 
+  <table style="width:100%" style="border: 2px solid black;">
+    <tr  colspan="2">
+      <td width = "10%"><font color="red">*</font>Zona:</td>
+      <td>
+        <div class="typeHead">
+          <input type="text" list="zonas" id="zonanom" name="zonanom" #name="ngModel"  [(ngModel)]="modalidadesService.selectedModalidad.zonanom" placeholder="Zonas"/> 
+          <datalist id="zonas" >
+              <select id ="zsel" >
+                <option *ngFor="let zona of zonasService.zonas" id={{zona.zonaid}} value={{zona.zonanom}}></option>
+              </select>
+          </datalist>
+        </div>
+      </td>
+    </tr>
+    <tr  colspan="2" >
+      <td width = "10%"><font color="red">*</font>Nombre:</td>
+      <td>
+        <input type="hidden" name="modalidadid" #_id="ngModel" [(ngModel)]="modalidadesService.selectedModalidad.modalidadid"> 
+        <input type="text" name="modalidadnom" #name="ngModel" [(ngModel)]="modalidadesService.selectedModalidad.modalidadnom" placeholder="Modalidad">
+      </td>
+    </tr>
+    <tr >
+      <td colspan="2">
+        <button style="margin-right: 3px;" class="btn left" (click)="resetForm(modalidadForm)">Borrar</button>
+        <button class="btn left" (click)="addModalidad(modalidadForm)">Guardar</button>
+      </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+        <font  size="1" color="red">* Campos obligatorios</font>
+      </td>
+    </tr>
+  </table>
+</form>
+<table style="width:100%"> 
+  <tr>
+    <th colspan="3">Listado Modalidades</th>
+  </tr>
+  <tr>
+    <td colspan="3"><i>Nombre</i></td>
+  </tr>
+  <tr *ngFor="let modalidad of modalidadesService.modalidad">
+    <td colspan="2">{{ modalidad.modalidadnom }}</td>
+    <td>
+      <a style="cursor:pointer;" (click)="editModalidad(modalidad)">
+        <img width="20" alt="Editar" src="assets/editar.png"/>
+      </a>
+      <a style="cursor:pointer;" (click)="deleteModalidad(modalidad.modalidadid, modalidadForm)">
+        <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+      </a>
+    </td>
+  </tr>
+</table>
+</div> 

@@ -1,0 +1,15 @@
+.aligncenter {
+    text-align: center;
+}
+
+.alignleft {
+    text-align: left;
+}
+
+.valigntop{
+    vertical-align: top;
+}
+
+.tdvacio{
+    height: 52px;
+}

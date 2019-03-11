@@ -1,0 +1,12 @@
+
+  <div *ngFor="let noti of Not">
+    <h4>{{noti.noticiascab}}</h4>
+    <br>
+    <img style="max-width:100%;width:auto;height:auto;" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + noti.noticiasfot)">
+    <br>
+    <b>{{noti.noticiasdet}}</b>
+    <br>
+    <textarea rows="4" readonly>
+            {{noti.noticiastex}}
+    </textarea>
+  </div>

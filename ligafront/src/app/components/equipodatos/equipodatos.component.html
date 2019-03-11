@@ -1,0 +1,89 @@
+<!--Nombre y foto del equipo-->
+<table>
+  <tr>
+    <td bgcolor="black" width="20%" >
+      <p class="aligncenter">
+      <img style="vertical-align:middle" width="180" height="190" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + EqEsc)">
+      </p>
+    </td>
+    <td bgcolor="black" width="40%" >
+      <b><font color="white" size=10>{{EqNom}}</font></b>
+    </td>
+    <td width="40%"> 
+      <img style="display: block" width="100%" vspace="0" height="350" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + EqFot)">
+    </td>
+  </tr>
+</table>
+
+<!--Datos generales y jugadores, tabs-->
+<input id="tab1" type="radio" name="tabs" checked>
+<label for="tab1">General</label>
+&nbsp;
+<input id="tab2" type="radio" name="tabs">
+<label for="tab2">Jugadores</label>
+
+<section id="content1">
+  <ul>
+    <tr>
+      <td>Fecha de inscripción:</td><td>&nbsp; &nbsp; {{EqFecIns}}</td>
+    </tr>  
+    <br>
+    <tr>
+      <td>Jugadores inscriptos:</td><td>&nbsp; &nbsp; {{CanJug}}</td>
+    </tr>
+    <br>
+    <tr>
+      <td>Partidos jugados:</td><td>&nbsp; &nbsp; {{CanPar2}}</td>
+    </tr>
+    <br>
+    <tr>
+      <td>Amarillas:</td><td>&nbsp; &nbsp; {{CanAma}}</td>
+    </tr>
+    <br>
+    <tr>
+      <td>Rojas:</td><td>&nbsp; &nbsp; {{CanRoj}}</td>
+    </tr>
+    <br>
+    <tr>
+      <td>Detalles:</td><td>&nbsp; &nbsp; {{EqObs}}</td>
+    </tr>
+  </ul>
+</section>
+
+<section id="content2">
+  <div style="display: inline;" class="container" *ngFor="let jug of jugadoresService.jugador; let ind=index" >
+    <td >
+      <a href="#" [routerLink]="['../../jugadordatos', jug.jugadorid]">
+        <img width="250" height="180" [src]="this.domSanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + jug.jugadorfot)">
+      </a>
+      <br>
+      <a href="#" [routerLink]="['../../jugadordatos', jug.jugadorid]">
+        <p class="blocktext">{{jug.jugadornom}}</p>
+      </a>
+    </td> &nbsp;
+  </div>
+</section>
+
+<!--Noticias-->
+<br><br>
+
+<table  style="max-width:100%;width:auto;height:auto;">
+<td width = "20%" style="vertical-align:top; text-align: center;">
+
+  <div align="left">
+  <img src="../../../assets/CabNoticiasEq.jpg" alt="Noticias" style="max-width:30%;width:auto;height:auto;"/>
+  </div>
+  <br>
+  <div style="height:300px; overflow:auto; max-width:100%;width:auto;height:auto;">
+  <li *ngFor="let noticia of noticiasService.noticias">
+    <a href="#"  [routerLink]="['../../viewnoticia', noticia.noticiasid]">
+      {{ noticia.noticiascab }}
+    </a>
+    <br>
+    <hr/>
+    <br>
+  </li>
+  </div>
+</td>
+</table>
+

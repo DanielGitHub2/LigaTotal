@@ -1,0 +1,102 @@
+<div align="center" style="width: 70%;margin-left: 10px;">
+  <form #usuarioForm="ngForm"> 
+    <div align="left">
+      <b>INGRESO USUARIOS</b>
+    </div>
+    <table style="width:100%" style="border: 2px solid black;">
+        <tr  colspan="2" >
+          <td width = "20%"><font color="red">*</font>Nombre:</td>
+          <td>
+            <input type="hidden" name="usuarioid" #_id="ngModel" [(ngModel)]= "this.usuariosService.selectedUsuario.UsuariosId"> 
+            <input type="text" name="usuarionom" #name="ngModel" [(ngModel)]= "this.usuariosService.selectedUsuario.UsuariosNom" placeholder="Nombre" required=true>
+          </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "20%">Teléfono:</td>
+          <td>
+            <input type="text" name="usuariotel" #name="ngModel" [(ngModel)]="this.usuariosService.selectedUsuario.UsuariosTel" placeholder="Teléfono">
+          </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "20%"><font color="red">*</font>eMail:</td>
+          <td>
+            <input type="text" name="usuariomai" #name="ngModel" [(ngModel)]="usuariosService.selectedUsuario.UsuariosMai" placeholder="eMail">
+          </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "20%"><font color="red">*</font>Permisos:</td>
+          <td>
+            <input type="text" list="permisos" name="usuarioper" id="usuarioper" (change)='ShowEquipo($event.target.value)' #name="ngModel" [(ngModel)]="usuariosService.selectedUsuario.UsuariosPer" placeholder="Permisos">
+            <datalist id="permisos">
+                <option value="Administrador" id="1"> 
+                <option value="Encargado" id="2">
+            </datalist> 
+          </td>
+        </tr>
+        <tr colspan="2" *ngIf= "MuestroEquipo == 1">
+          <td width = "20%">Equipo asociado:</td>
+          <td>
+            <div class="typeHead">
+              <input type="hidden" name="equipoidid" id="equipoid">
+              <input list="equipos" id="equiponom" name="equiponom" #name="ngModel"  [(ngModel)]="usuariosService.selectedUsuario.equiponom" placeholder="Equipos" /> 
+              <datalist id="equipos" >
+                  <select id ="esel" >
+                    <option *ngFor="let equipo of equiposService.equipo" id={{equipo.equipoid}} value={{equipo.equiponom}}></option>
+                  </select>
+              </datalist>
+            </div>
+          </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "20%"><font color="red">*</font>Alias:</td>
+          <td>
+            <input type="text" name="usuarioali" #name="ngModel" [(ngModel)]="this.usuariosService.selectedUsuario.UsuariosAli" placeholder="Alias">
+          </td>
+        </tr>
+        <tr  colspan="2" >
+          <td width = "20%"><font color="red">*</font>Password:</td>
+          <td>
+            <input type="password" name="usuariopas" #name="ngModel" [(ngModel)]="this.usuariosService.selectedUsuario.UsuariosPas" placeholder="Password">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <button style="margin-right: 3px;" class="btn left" (click)="resetForm(usuarioForm)">Borrar</button>
+            <button class="btn left" (click)="addUsuario(usuarioForm)">Guardar</button>
+          </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+            <font  size="1" color="red">* Campos obligatorios</font>
+          </td>
+        </tr>
+    </table>
+  </form>
+  <table style="width:100%" id="TUsu">  
+    <tr>
+      <th colspan="4">Listado Usuarios</th>
+    </tr>
+
+    <tr>
+      <th colspan="1">Filtro por Nombre</th>
+      <th colspan="3"><input type="text" id="BUsu" (keyup)="Buscar()" placeholder="Nombre"></th>
+    </tr>
+
+    <tr>
+      <th style="width: 40%"><i>Nombre</i></th>
+      <th style="width: 40%" colspan="4"><i>Alias</i></th>
+    </tr>
+    <tr *ngFor="let usuario of usuariosService.usuarios">
+      <td style="width: 40%" colspan="2">{{ usuario.UsuariosNom }}</td>
+      <td style="width: 40%" colspan="2">{{ usuario.UsuariosAli }}</td>
+      <td>
+        <a style="cursor:pointer;" (click)="editUsuario(usuario)">
+          <img width="20" alt="Editar" src="assets/editar.png"/>
+        </a>
+        <a style="cursor:pointer;" (click)="deleteUsuario(usuario.UsuariosId, usuarioForm)">
+          <img width="20" alt="Borrar" src="assets/borrar2.png"/>
+        </a>
+      </td>
+    </tr>
+  </table>  
+</div>
