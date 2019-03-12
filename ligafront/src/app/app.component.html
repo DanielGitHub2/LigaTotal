@@ -81,7 +81,7 @@
     <li style="color:red;font-size:30px;">LogIn</li>
     <hr style="height: 1px;border-color: red;"/>
     <li>Usuario: <input type="text" #name="ngModel" name="username" [(ngModel)]="username" placeholder="Usuario"/></li>
-    <li>Password: <input type="text" #name="ngModel" name="password" [(ngModel)]="password" placeholder="Password"/></li>
+    <li>Password: <input type="password" #name="ngModel" name="password" [(ngModel)]="password" placeholder="Password"/></li>
     <li><button (click)="logIn(appForm)">LogIn</button>
     &nbsp;&nbsp;&nbsp;
     <button (click)="closeModal('custom-modal-1');">Cerrar</button></li>
